@@ -27,7 +27,9 @@ public class PlacableObject : MonoBehaviour
 
     public virtual void Move()
     {
-        if (BuildingSystem.inBuildingMode) return;
+        if (BuildingSystem.inBuildingMode) 
+            return;
+            
         BuildingSystem.inBuildingMode = true;
 
         isPlaced = false;

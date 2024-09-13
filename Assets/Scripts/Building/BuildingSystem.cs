@@ -23,7 +23,8 @@ public class BuildingSystem : MonoBehaviour
 
     void Update()
     {
-        if (!_objectToPlace) return;
+        if (!_objectToPlace) 
+            return;
 
         ChangeMaterial(CanBePlaced());
         if (Input.GetKeyDown(KeyCode.Q)) 
@@ -71,7 +72,8 @@ public class BuildingSystem : MonoBehaviour
 
     public void InitializeWithObject(GameObject prefab)
     {
-        if (inBuildingMode) return;
+        if (inBuildingMode) 
+            return;
 
         inBuildingMode = true;
 
@@ -97,11 +99,19 @@ public class BuildingSystem : MonoBehaviour
         UI.transform.GetChild(0).GetComponent<Button>().onClick.AddListener(() => PlaceButton());
 
         if (destroy) 
-            UI.transform.GetChild(1).GetComponent<Button>().onClick.AddListener(() => { Destroy(_objectToPlace.gameObject); UI.SetActive(false); inBuildingMode = false; });
+            UI.transform.GetChild(1).GetComponent<Button>().onClick.AddListener(() => 
+            { 
+                Destroy(_objectToPlace.gameObject); 
+                UI.SetActive(false); 
+                inBuildingMode = false;
+            });
         else
         {
             Vector3 oldPosition = _objectToPlace.transform.position;
-            UI.transform.GetChild(1).GetComponent<Button>().onClick.AddListener(() => { _objectToPlace.transform.position = oldPosition; PlaceButton(); });
+            UI.transform.GetChild(1).GetComponent<Button>().onClick.AddListener(() => 
+            {
+                _objectToPlace.transform.position = oldPosition; PlaceButton();
+            });
         }
     }
 
@@ -126,7 +136,7 @@ public class BuildingSystem : MonoBehaviour
 
     private void ChangeMaterial(bool itCanBePlaced)
     {
-        MeshRenderer meshRenderer = _objectToPlace.GetComponent<MeshRenderer>();
+        MeshRenderer meshRenderer = _objectToPlace.transform.GetChild(_objectToPlace.transform.childCount - 1).GetComponent<MeshRenderer>();
         meshRenderer.material = itCanBePlaced ? materials[0] : materials[1];
     }
 }
