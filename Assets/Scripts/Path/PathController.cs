@@ -20,5 +20,11 @@ public enum Rotation
 
 public class PathController : MonoBehaviour
 {
+    public static PathController instance;
     public List<PathCell> pathCells = new();
+
+    void Awake()
+    {
+        instance = this;
+    }
 }

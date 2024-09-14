@@ -17,7 +17,8 @@ public class BuildingUI : MonoBehaviour
         foreach (GameObject building in allBuildings)
         {
             BuildingCard _singleCard = Instantiate(buildingCardPrefab, parent);
-            _singleCard.AssignData(null, null, () => BuildingSystem.instance.InitializeWithObject(building));
+            BuildingID _buildingID = building.GetComponent<BuildingID>();
+            _singleCard.AssignData(_buildingID.showcaseImage, _buildingID.buildingName, () => BuildingSystem.instance.InitializeWithObject(building));
         }
     }
 }
