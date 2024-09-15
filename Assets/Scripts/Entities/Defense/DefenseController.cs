@@ -6,10 +6,14 @@ public class DefenseController : MonoBehaviour
 {
     public EntityStatistics _statistics;
     public List<GameObject> detectedEnemies = new();
+    public GameObject currentTarget;
     private bool attacked;
 
     private void Update()
     {
+        if (currentTarget == null && detectedEnemies.Count > 0)
+            currentTarget = detectedEnemies[0];
+
         RotateTowardsFirstEnemy();
         Attack();
     }
@@ -40,7 +44,21 @@ public class DefenseController : MonoBehaviour
     private IEnumerator WaitAndAttack()
     {
         yield return new WaitForSeconds(_statistics.attackSpeed);
-        detectedEnemies[0].GetComponent<EnemyController>()._statistics.TakeDamage(_statistics.damage);
+
+        if (detectedEnemies.Count <= 0)
+        {
+            attacked = false;
+            yield break;
+        }
+
+        detectedEnemies[0].GetComponent<EnemyController>()._statistics.TakeDamage(_statistics.damage, () => 
+        {
+            //Destroy object
+            Destroy(detectedEnemies[0]);
+            detectedEnemies.RemoveAt(0);
+
+            //Give reward
+        });
         attacked = false;
     }
 
@@ -48,8 +66,13 @@ public class DefenseController : MonoBehaviour
     {
         if (detectedEnemies.Count > 0)
         {
-            GameObject firstEnemy = detectedEnemies[0];
-            Vector3 direction = (firstEnemy.transform.position - transform.position).normalized;
+            if (currentTarget == null)
+            {
+                detectedEnemies.RemoveAt(0);
+                return;
+            }
+
+            Vector3 direction = (currentTarget.transform.position - transform.position).normalized;
             Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
             transform.parent.GetChild(0).rotation = Quaternion.Slerp(transform.parent.GetChild(0).rotation, lookRotation, Time.deltaTime * 5f);
         }

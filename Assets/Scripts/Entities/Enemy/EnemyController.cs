@@ -70,6 +70,14 @@ public class EnemyController : MonoBehaviour
         if (PathController.instance.pathCells.Count <= pathIndex)
         {
             isStopped = true;
+            GameController.instance._statistics.TakeDamage(_statistics.health, () => 
+            {
+                _statistics.TakeDamage(_statistics.health, () => 
+                {
+                    Destroy(gameObject);
+                });
+                print("You lost");
+            });
             return;
         }
 

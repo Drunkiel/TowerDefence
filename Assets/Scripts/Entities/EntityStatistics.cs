@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,15 +19,16 @@ public class EntityStatistics
 
     [SerializeField] private Slider healthSlider;
 
-    public void TakeDamage(int amount)
+    public void TakeDamage(int amount, Action deathAction)
     {
         int damageToDeal = amount;
 
         health -= damageToDeal;
         healthSlider.value = (float)health / maxHealth;
-        if (health < 0)
+        if (health <= 0)
         {
             health = 0;
+            deathAction.Invoke();
         }
     }
 }
