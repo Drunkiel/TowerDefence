@@ -21,8 +21,8 @@ public class WaveController : MonoBehaviour
 {
     [SerializeField] private Transform startPoint;
     public List<Wave> waves = new(); // List of all waves
-    public int waveIndex = 0; 
     public bool canGoToNextWave;
+    public WaveUI _waveUI;
 
     [SerializeField] private List<GameObject> spawnedEnemies = new();
 
@@ -54,11 +54,10 @@ public class WaveController : MonoBehaviour
         // Iterate through all waves
         for (int i = 0; i < waves.Count; i++)
         {
-            waveIndex = i;
-            Debug.Log("Starting wave: " + (waveIndex + 1));
+            _waveUI.waveText.text = $"Wave\n{i + 1}/{waves.Count}";
 
             // Start all phases in the wave
-            yield return StartCoroutine(WavePhases(waves[waveIndex]));
+            yield return StartCoroutine(WavePhases(waves[i]));
 
             // After all phases are done, go to the next wave immediately
             canGoToNextWave = false;
@@ -73,7 +72,7 @@ public class WaveController : MonoBehaviour
         // Iterate through all phases
         for (int i = 0; i < wave.phases.Count; i++)
         {
-            Debug.Log("Starting phase: " + (i + 1));
+            _waveUI.phaseText.text = $"Phase\n{i + 1}/{wave.phases.Count}";
             
             // Spawn enemies in the current phase
             yield return StartCoroutine(SpawnEnemies(wave.phases[i]));
@@ -81,7 +80,7 @@ public class WaveController : MonoBehaviour
             // Wait until all enemies from the current phase are defeated
             yield return new WaitUntil(() => spawnedEnemies.Count == 0);
             
-            Debug.Log("Phase " + (i + 1) + " completed, waiting " + wave.nextPhaseDelay + " seconds for the next phase.");
+            _waveUI.StartCoroutine(_waveUI.StartTimer(wave.nextPhaseDelay));
 
             // Delay before starting the next phase
             yield return new WaitForSeconds(wave.nextPhaseDelay);
