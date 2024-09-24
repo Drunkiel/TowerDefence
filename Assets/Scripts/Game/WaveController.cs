@@ -51,6 +51,9 @@ public class WaveController : MonoBehaviour
 
     private IEnumerator StartRound()
     {
+        _waveUI.StartCoroutine(_waveUI.StartTimer(30));
+        yield return new WaitForSeconds(30);
+
         // Iterate through all waves
         for (int i = 0; i < waves.Count; i++)
         {

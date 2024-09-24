@@ -168,7 +168,7 @@ GameObject:
   - component: {fileID: 6817558035067903015}
   - component: {fileID: 4237739974691730426}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Weapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -226,7 +226,7 @@ MonoBehaviour:
     health: 5
     maxHealth: 5
     damage: 1
-    attackSpeed: 0
+    attackSpeed: 2
     speedForce: 0
     maxSpeed: 0
     healthSlider: {fileID: 0}
