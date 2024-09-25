@@ -41,7 +41,7 @@ public class EnemyController : MonoBehaviour
         else
             GoTo(positionToGo);
 
-        //Controls max speed
+        //Controll max speed
         if (rgBody.velocity.magnitude > _statistics.maxSpeed)
             rgBody.velocity = Vector3.ClampMagnitude(rgBody.velocity, _statistics.maxSpeed);
     }
@@ -70,13 +70,12 @@ public class EnemyController : MonoBehaviour
         if (PathController.instance.pathCells.Count <= pathIndex)
         {
             isStopped = true;
-            GameController.instance._statistics.TakeDamage(_statistics.health, () => 
+            GameController.instance._statistics.TakeDamage(_statistics.health, () =>
             {
-                _statistics.TakeDamage(_statistics.health, () => 
+                _statistics.TakeDamage(_statistics.health, () =>
                 {
                     Destroy(gameObject);
                 });
-                print("You lost");
             });
             return;
         }
@@ -99,16 +98,17 @@ public class EnemyController : MonoBehaviour
             direction.z * _statistics.speedForce
         );
 
-        //Flipping Enemy to direction they are going
-        // if (movement.x < 0 && !isFlipped)
-        // {
-        //     transform.GetChild(0).localScale = new(-1, 1, 1);
-        //     isFlipped = true;
-        // }
-        // else if (movement.x > 0 && isFlipped)
-        // {
-        //     transform.GetChild(0).localScale = new(1, 1, 1);
-        //     isFlipped = false;
-        // }
+        // Obrót dziecka obiektu (visualModel) w stronê pozycji docelowej
+        RotateModel(direction);
+    }
+
+    // Funkcja obracaj¹ca dziecko obiektu
+    private void RotateModel(Vector3 direction)
+    {
+        Vector3 flatDirection = new Vector3(direction.x, 0, direction.z).normalized;
+
+        //Rotate object
+        if (flatDirection.sqrMagnitude > 0.001f)
+            transform.GetChild(0).rotation = Quaternion.LookRotation(flatDirection);
     }
 }

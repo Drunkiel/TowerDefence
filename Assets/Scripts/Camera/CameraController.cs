@@ -34,6 +34,7 @@ public class CameraController : MonoBehaviour
         // Set initial position based on the target's position
         if (target != null)
         {
+            HandleRotation();
             transform.position = target.position - transform.forward * distanceFromTarget;
             virtualCamera.transform.LookAt(target);
         }
@@ -41,7 +42,9 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        HandleRotation();
+        // Check if the right mouse button is held down for rotation
+        if (Input.GetMouseButton(1))
+            HandleRotation();
         HandleZoom();
 
         // Movement, jump and animations control
@@ -95,34 +98,30 @@ public class CameraController : MonoBehaviour
     // Handle rotation and rotate target to match the camera
     private void HandleRotation()
     {
-        // Check if the right mouse button is held down for rotation
-        if (Input.GetMouseButton(1))
+        // Get mouse input for horizontal and vertical movement
+        float mouseX = Input.GetAxis("Mouse X");
+        float mouseY = Input.GetAxis("Mouse Y");
+
+        // Update the current rotations based on mouse movement
+        currentRotationY += mouseX * rotationSpeed * Time.deltaTime;
+        currentRotationX -= mouseY * rotationSpeed * Time.deltaTime;
+
+        // Clamp vertical rotation to avoid flipping the camera over and going below the object
+        currentRotationX = Mathf.Clamp(currentRotationX, minVerticalAngle, maxVerticalAngle);
+
+        // Update the camera position based on the new rotation
+        if (target != null)
         {
-            // Get mouse input for horizontal and vertical movement
-            float mouseX = Input.GetAxis("Mouse X");
-            float mouseY = Input.GetAxis("Mouse Y");
+            // Rotate around the target while maintaining distance
+            Quaternion rotation = Quaternion.Euler(currentRotationX, currentRotationY, 0);
+            Vector3 direction = rotation * Vector3.back * distanceFromTarget;
+            virtualCamera.transform.position = target.position + direction;
 
-            // Update the current rotations based on mouse movement
-            currentRotationY += mouseX * rotationSpeed * Time.deltaTime;
-            currentRotationX -= mouseY * rotationSpeed * Time.deltaTime;
+            // Always look at the target
+            virtualCamera.transform.LookAt(target);
 
-            // Clamp vertical rotation to avoid flipping the camera over and going below the object
-            currentRotationX = Mathf.Clamp(currentRotationX, minVerticalAngle, maxVerticalAngle);
-
-            // Update the camera position based on the new rotation
-            if (target != null)
-            {
-                // Rotate around the target while maintaining distance
-                Quaternion rotation = Quaternion.Euler(currentRotationX, currentRotationY, 0);
-                Vector3 direction = rotation * Vector3.back * distanceFromTarget;
-                virtualCamera.transform.position = target.position + direction;
-
-                // Always look at the target
-                virtualCamera.transform.LookAt(target);
-
-                // Rotate the target to follow the camera's horizontal movement (Y-axis only)
-                target.rotation = Quaternion.Euler(0, currentRotationY, 0);
-            }
+            // Rotate the target to follow the camera's horizontal movement (Y-axis only)
+            target.rotation = Quaternion.Euler(0, currentRotationY, 0);
         }
     }
 

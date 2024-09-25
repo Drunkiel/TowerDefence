@@ -206,7 +206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingName: Cross
-  showcaseImage: {fileID: 0}
+  showcaseImage: {fileID: 21300000, guid: 3a69dfb2803eccf5980044e45aff5ca7, type: 3}
 --- !u!114 &4252910838229303069
 MonoBehaviour:
   m_ObjectHideFlags: 0

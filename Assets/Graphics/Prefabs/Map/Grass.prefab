@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingName: Grass
-  showcaseImage: {fileID: 0}
+  showcaseImage: {fileID: 21300000, guid: 4f837ad4e08757860b715f2ff7e3818c, type: 3}
 --- !u!114 &5706949198923129627
 MonoBehaviour:
   m_ObjectHideFlags: 0

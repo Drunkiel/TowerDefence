@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingName: Trees
-  showcaseImage: {fileID: 21300000, guid: b03cd5d04b11ad0159dd62f374660819, type: 3}
+  showcaseImage: {fileID: 21300000, guid: 521eeb13d51a09897a52afef284ac2bc, type: 3}
 --- !u!114 &7340642265150358277
 MonoBehaviour:
   m_ObjectHideFlags: 0

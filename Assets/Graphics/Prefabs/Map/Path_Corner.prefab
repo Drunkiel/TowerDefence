@@ -122,7 +122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingName: Corner
-  showcaseImage: {fileID: 0}
+  showcaseImage: {fileID: 21300000, guid: d37892ee450075426a65e5c2f65009e8, type: 3}
 --- !u!114 &6824747537553910756
 MonoBehaviour:
   m_ObjectHideFlags: 0

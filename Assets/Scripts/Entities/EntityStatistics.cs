@@ -25,10 +25,10 @@ public class EntityStatistics
 
         health -= damageToDeal;
         healthSlider.value = (float)health / maxHealth;
+        deathAction.Invoke();
+
+        //Checks if health is below or equal to 0
         if (health <= 0)
-        {
             health = 0;
-            deathAction.Invoke();
-        }
     }
 }
