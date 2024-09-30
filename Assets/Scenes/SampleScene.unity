@@ -22705,17 +22705,17 @@ MonoBehaviour:
   waves:
   - phases:
     - enemiesToSpawn:
-      - {fileID: 8832179591544660412, guid: 0c7768d79b1ffcd4aa0073962766972b, type: 3}
-      - {fileID: 8832179591544660412, guid: 0c7768d79b1ffcd4aa0073962766972b, type: 3}
-      - {fileID: 8832179591544660412, guid: 0c7768d79b1ffcd4aa0073962766972b, type: 3}
-      - {fileID: 8832179591544660412, guid: 0c7768d79b1ffcd4aa0073962766972b, type: 3}
-      spawnDelay: 3
-    - enemiesToSpawn:
       - {fileID: 7822735398175564605, guid: f5eab729a8642968dabbddee715cddf7, type: 3}
       - {fileID: 7822735398175564605, guid: f5eab729a8642968dabbddee715cddf7, type: 3}
       - {fileID: 7822735398175564605, guid: f5eab729a8642968dabbddee715cddf7, type: 3}
       - {fileID: 7822735398175564605, guid: f5eab729a8642968dabbddee715cddf7, type: 3}
       spawnDelay: 4
+    - enemiesToSpawn:
+      - {fileID: 8832179591544660412, guid: 0c7768d79b1ffcd4aa0073962766972b, type: 3}
+      - {fileID: 8832179591544660412, guid: 0c7768d79b1ffcd4aa0073962766972b, type: 3}
+      - {fileID: 8832179591544660412, guid: 0c7768d79b1ffcd4aa0073962766972b, type: 3}
+      - {fileID: 8832179591544660412, guid: 0c7768d79b1ffcd4aa0073962766972b, type: 3}
+      spawnDelay: 3
     nextPhaseDelay: 10
   - phases:
     - enemiesToSpawn:
@@ -24632,6 +24632,10 @@ MonoBehaviour:
   - {fileID: 1133668313698567324, guid: a8f24d472af9fe3c38287437f51d49e6, type: 3}
   - {fileID: 2029264622752222104, guid: b21095839011bcfcb84d4ae4ff34ba5c, type: 3}
   - {fileID: 1833793981444247426, guid: 18df8675c5454352393572e052942bed, type: 3}
+  - {fileID: 5020881763220735083, guid: 7f003cd4f16c01ecd8fb6c3aa2b40638, type: 3}
+  - {fileID: 6672587832756182222, guid: 827311ffad33c4c42877af16be93be24, type: 3}
+  - {fileID: 8980067785773047870, guid: f6bb8e2119717c1478cd070247d83b67, type: 3}
+  - {fileID: 2826564448125758432, guid: 92bd49cfa0a5cc84e94f060f0579f38e, type: 3}
   parent: {fileID: 563582171}
   buildingCardPrefab: {fileID: 9156505456140353706, guid: a17285abd1db8b58dbacb2673cf5fbf9,
     type: 3}

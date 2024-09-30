@@ -8,6 +8,12 @@ public class DefenseController : MonoBehaviour
     public List<GameObject> detectedEnemies = new();
     public GameObject currentTarget;
     private bool attacked;
+    private Animator anim;
+
+    private void Start()
+    {
+        anim = transform.parent.GetComponent<Animator>();    
+    }
 
     private void Update()
     {
@@ -50,6 +56,9 @@ public class DefenseController : MonoBehaviour
             attacked = false;
             yield break;
         }
+
+        anim.Play("Attack");
+        yield return new WaitForSeconds(anim.GetCurrentAnimatorStateInfo(0).length);
 
         detectedEnemies[0].GetComponent<EnemyController>()._statistics.TakeDamage(_statistics.damage, () => 
         {
